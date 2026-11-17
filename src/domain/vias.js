@@ -18,7 +18,7 @@ export const VIAS = [
     via: 'Av. Brasil',
     trecho: 'Maré · km 12',
     referencia: 'Altura da Vila do João, pista central',
-    x: 540, y: 250, rotulo: 'abaixo',
+    x: 540, y: 250, rotulo: 'acima',
     sensibilidade: 1, fase: 0,
   },
   {
@@ -50,7 +50,7 @@ export const VIAS = [
     via: 'Linha Amarela',
     trecho: 'Bonsucesso',
     referencia: 'Acesso pela Av. Brasil, sentido Barra',
-    x: 455, y: 285, rotulo: 'esquerda',
+    x: 455, y: 285, rotulo: 'direita',
     sensibilidade: 0.5, fase: 0.4,
   },
   {

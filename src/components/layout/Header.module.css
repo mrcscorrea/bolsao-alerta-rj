@@ -94,3 +94,12 @@
   .nav svg { display: block; }
   .nav a.ativo::after { top: -5px; bottom: auto; left: 32%; right: 32%; }
 }
+
+/* backdrop-filter cria um novo "containing block": sem isso a barra fixa
+   do celular ficaria presa dentro do header em vez de colar no rodapé */
+@media (max-width: 719px) {
+  .header {
+    backdrop-filter: none;
+    background: var(--bg);
+  }
+}

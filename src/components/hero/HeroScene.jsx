@@ -213,9 +213,9 @@ function Pista({ cor }) {
 function Camera() {
   const { camera, pointer } = useThree()
   useFrame(() => {
-    camera.position.x += (5.2 + pointer.x * 0.8 - camera.position.x) * 0.04
+    camera.position.x += (6.4 + pointer.x * 0.8 - camera.position.x) * 0.04
     camera.position.y += (2.6 + pointer.y * 0.4 - camera.position.y) * 0.04
-    camera.lookAt(0, 0.5, 0)
+    camera.lookAt(-4.2, -0.2, -0.4)
   })
   return null
 }
@@ -237,11 +237,11 @@ export default function HeroScene({ laminaCm, chuvaMmH, tema }) {
       <Canvas
         frameloop={visivel ? 'always' : 'never'}
         dpr={[1, 1.5]}
-        camera={{ position: [5.2, 2.6, 6.4], fov: 38 }}
+        camera={{ position: [6.4, 2.6, 8.6], fov: 38 }}
         gl={{ antialias: true, alpha: true }}
         aria-hidden="true"
       >
-        <fog attach="fog" args={[cores.fundo, 9, 24]} />
+        <fog attach="fog" args={[cores.fundo, 13, 30]} />
         <ambientLight intensity={0.35 * cores.luz} />
         <hemisphereLight args={['#9fb7c4', '#0e0f0c', 0.5 * cores.luz]} />
         <pointLight position={[-3.2, 4.2, 1.5]} color="#ffb347" intensity={28} distance={14} />

@@ -10,11 +10,15 @@ import { Painel } from './pages/Painel.jsx'
 import { ViaDetalhe } from './pages/ViaDetalhe.jsx'
 import { Relatos } from './pages/Relatos.jsx'
 import { NaoEncontrada } from './pages/NaoEncontrada.jsx'
+import { ErroGeral } from './components/layout/ErroGeral.jsx'
 
 /** Volta ao topo a cada troca de página. */
 function RolarAoTopo() {
   const { pathname } = useLocation()
-  useEffect(() => window.scrollTo(0, 0), [pathname])
+  // chaves no corpo: o efeito não pode devolver nada além de uma função de limpeza
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
   return null
 }
 
@@ -28,7 +32,9 @@ function Layout() {
       <Header tema={tema} alternarTema={alternarTema} />
       <PmvTicker />
       <main id="conteudo">
-        <Outlet context={{ tema }} />
+        <ErroGeral>
+          <Outlet context={{ tema }} />
+        </ErroGeral>
       </main>
       <Footer />
     </>

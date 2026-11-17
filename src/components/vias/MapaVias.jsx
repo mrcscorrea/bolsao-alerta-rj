@@ -19,7 +19,7 @@ export function MapaVias({ vias, destacada, onDestacar }) {
       <svg viewBox="80 30 760 480" role="group" aria-label="Mapa esquemático das vias monitoradas">
         {/* Baía de Guanabara */}
         <path d="M760 30 H840 V510 H770 L770 420 L800 360 L760 300 L790 220 L740 150 Z" className={styles.baia} />
-        <text x="808" y="250" className={styles.baiaRotulo} transform="rotate(90 808 250)">
+        <text x="812" y="160" className={styles.baiaRotulo} transform="rotate(90 812 160)">
           BAÍA DE GUANABARA
         </text>
 
@@ -31,7 +31,7 @@ export function MapaVias({ vias, destacada, onDestacar }) {
         ))}
 
         <text x="150" y="190" className={styles.nomeVia}>AV. BRASIL</text>
-        <text x="732" y="200" className={styles.nomeVia}>L. VERMELHA</text>
+        <text x="634" y="200" textAnchor="end" className={styles.nomeVia}>L. VERMELHA</text>
         <text x="300" y="470" className={styles.nomeVia}>L. AMARELA</text>
         <text x="760" y="347" className={styles.nomeCentro}>CENTRO</text>
 
