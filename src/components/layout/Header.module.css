@@ -1,0 +1,96 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 64px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+  text-decoration: none;
+}
+
+.nome {
+  font-size: 1.05rem;
+  font-variation-settings: 'wdth' 112;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+.nome b { font-weight: 900; }
+
+.rj {
+  padding: 1px 6px 2px;
+  border: 1.5px solid currentColor;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.nav {
+  display: flex;
+  gap: 4px;
+}
+
+.nav a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  color: var(--ink-2);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color var(--t-fast);
+}
+.nav a:hover { color: var(--ink); }
+.nav svg { display: none; width: 20px; height: 20px; fill: currentColor; }
+
+.nav a.ativo { color: var(--ink); }
+.nav a.ativo::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 6px;
+  height: 3px;
+  background: var(--signal);
+}
+
+/* celular: navegação vira barra inferior, ao alcance do polegar */
+@media (max-width: 719px) {
+  .nome { font-size: 0.95rem; }
+  .nav {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 30;
+    justify-content: space-around;
+    padding: 4px 8px calc(4px + env(safe-area-inset-bottom));
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+  }
+  .nav a {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    min-height: 56px;
+    font-size: 0.72rem;
+  }
+  .nav svg { display: block; }
+  .nav a.ativo::after { top: -5px; bottom: auto; left: 32%; right: 32%; }
+}

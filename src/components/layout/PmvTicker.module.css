@@ -1,0 +1,48 @@
+/* Painel de Mensagem Variável: sempre preto, como o painel real da via */
+.pmv {
+  position: relative;
+  height: 38px;
+  background: #050504;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.janela {
+  height: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.faixa {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  align-items: center;
+  animation: rolar linear infinite;
+}
+
+.faixa span {
+  white-space: pre;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.12em;
+  color: var(--pmv);
+  /* "pontos de LED": máscara pontilhada sobre o texto */
+  mask-image: radial-gradient(circle, #000 55%, transparent 65%);
+  mask-size: 2.6px 2.6px;
+  filter: drop-shadow(0 0 4px var(--pmv));
+}
+
+/* cores fixas do painel (não mudam com o tema) */
+.pmv { --pmv: #f2b705; }
+.pmv[data-faixa='NORMAL'] { --pmv: #3fbf7f; }
+.pmv[data-faixa='PERIGO'] { --pmv: #ff5a46; }
+
+@keyframes rolar {
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faixa { animation: none; padding-left: 16px; }
+}
