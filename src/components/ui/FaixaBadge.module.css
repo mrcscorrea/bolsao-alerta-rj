@@ -1,0 +1,41 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 9px 3px 7px;
+  border: 1.5px solid var(--faixa);
+  background: var(--faixa-bg);
+  color: var(--faixa);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.grande {
+  padding: 6px 14px 6px 11px;
+  font-size: 0.85rem;
+}
+
+.ponto {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.badge[data-faixa='PERIGO'] .ponto { animation: piscar 1s steps(2, jump-none) infinite; }
+
+@keyframes piscar {
+  50% { opacity: 0.15; }
+}
+
+.tendencia {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.tendencia[data-tendencia='PIORANDO'] { color: var(--perigo); font-weight: 600; }
+.tendencia[data-tendencia='MELHORANDO'] { color: var(--normal); }

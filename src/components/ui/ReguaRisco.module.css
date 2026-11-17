@@ -1,0 +1,50 @@
+.regua {
+  position: relative;
+  height: 14px;
+  margin-bottom: 22px;
+}
+.compacta {
+  height: 6px;
+  margin-bottom: 0;
+}
+
+.zonas {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  gap: 2px;
+}
+.zonas span { height: 100%; opacity: 0.22; }
+.zonas [data-zona='NORMAL'] { background: var(--normal); }
+.zonas [data-zona='ATENCAO'] { background: var(--atencao); }
+.zonas [data-zona='PERIGO'] { background: var(--perigo); }
+
+.preenchido {
+  position: absolute;
+  inset: 0;
+  background: var(--faixa);
+  transform-origin: left;
+  transition: transform 600ms var(--ease-out), background-color var(--t-med);
+}
+
+.marcador {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  width: 3px;
+  margin-left: -1.5px;
+  background: var(--ink);
+  transition: left 600ms var(--ease-out);
+}
+.compacta .marcador { top: -3px; bottom: -3px; width: 2px; }
+
+.escala span {
+  position: absolute;
+  top: 20px;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--ink-2);
+}
+.escala span:first-child { transform: none; }
+.escala span:last-child { transform: translateX(-100%); }

@@ -1,0 +1,90 @@
+.mapa {
+  margin: 0;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 40px 40px,
+    var(--bg-2);
+  background-blend-mode: normal;
+}
+.mapa svg { width: 100%; height: auto; }
+
+.baia { fill: var(--water); opacity: 0.18; }
+.baiaRotulo {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  fill: var(--water);
+  opacity: 0.9;
+}
+
+.via {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 14;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.viaFaixa {
+  fill: none;
+  stroke: var(--bg-2);
+  stroke-width: 1.5;
+  stroke-dasharray: 8 8;
+  stroke-linejoin: round;
+}
+
+.nomeVia,
+.nomeCentro {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 800;
+  font-variation-settings: 'wdth' 120;
+  letter-spacing: 0.08em;
+  fill: var(--ink-2);
+}
+.nomeCentro { font-size: 11px; font-family: var(--mono); font-weight: 600; }
+
+.ponto { cursor: pointer; outline: none; }
+.alvo { fill: transparent; }
+.estacao {
+  fill: var(--bg);
+  stroke: var(--faixa);
+  stroke-width: 4;
+  transition: stroke var(--t-med), r var(--t-fast) var(--ease-out);
+}
+.miolo { fill: var(--faixa); transition: fill var(--t-med); }
+
+.ponto:hover .estacao,
+.ponto:focus-visible .estacao,
+.ponto[data-ativo='true'] .estacao { r: 12; }
+.ponto:focus-visible .alvo { stroke: var(--signal); stroke-width: 2; }
+
+.rotulo {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--bg-2);
+  stroke-width: 4px;
+}
+
+.onda {
+  fill: none;
+  stroke: var(--perigo);
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: onda 1.8s var(--ease-out) infinite;
+}
+@keyframes onda {
+  from { transform: scale(1); opacity: 0.9; }
+  to { transform: scale(3.2); opacity: 0; }
+}
+
+.legenda {
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  font-size: 0.8rem;
+  color: var(--ink-2);
+}

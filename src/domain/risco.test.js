@@ -74,3 +74,18 @@ describe('simulação de leituras', () => {
     expect(faixas).toEqual(new Set(['NORMAL', 'ATENCAO', 'PERIGO']))
   })
 })
+
+import { filtrarVias, normalizarTexto } from './filtros.js'
+
+describe('filtro de vias', () => {
+  const vias = [
+    { via: 'Praça da Bandeira', trecho: 'Tijuca', referencia: '', atual: { faixa: 'PERIGO', risco: 80 } },
+    { via: 'Av. Brasil', trecho: 'Caju', referencia: '', atual: { faixa: 'NORMAL', risco: 10 } },
+  ]
+  it('busca sem acento e filtra por faixa', () => {
+    expect(normalizarTexto('Praça')).toBe('praca')
+    expect(filtrarVias(vias, { busca: 'praca' })).toHaveLength(1)
+    expect(filtrarVias(vias, { faixa: 'NORMAL' })[0].via).toBe('Av. Brasil')
+    expect(filtrarVias(vias, { faixa: 'ATENCAO' })).toHaveLength(0)
+  })
+})

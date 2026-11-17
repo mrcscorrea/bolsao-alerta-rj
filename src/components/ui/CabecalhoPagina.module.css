@@ -1,0 +1,40 @@
+.cabecalho {
+  display: grid;
+  gap: 14px;
+  padding: clamp(40px, 7vw, 80px) 0 clamp(28px, 4vw, 44px);
+}
+
+.titulo {
+  font-size: clamp(2.3rem, 6.4vw, 4.6rem);
+  font-variation-settings: 'wdth' 118;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  max-width: 16ch;
+}
+
+.texto {
+  max-width: 60ch;
+  color: var(--ink-2);
+  font-size: 1.05rem;
+}
+
+.fonte {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink-2);
+}
+
+.aoVivo {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--normal);
+  animation: pulso 2s ease-in-out infinite;
+}
+@keyframes pulso {
+  50% { opacity: 0.3; }
+}

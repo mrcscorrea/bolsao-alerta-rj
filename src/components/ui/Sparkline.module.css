@@ -1,0 +1,28 @@
+.spark {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.linha {
+  fill: none;
+  stroke: var(--faixa);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transition: stroke var(--t-med);
+}
+
+.area {
+  fill: var(--faixa);
+  opacity: 0.1;
+}
+
+.limite {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.zonaPerigo { fill: var(--perigo); opacity: 0.06; }
+.zonaAtencao { fill: var(--atencao); opacity: 0.06; }

@@ -1,0 +1,68 @@
+.item { list-style: none; }
+
+.card {
+  display: grid;
+  gap: 14px;
+  padding: 18px 18px 16px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--faixa);
+  background: var(--bg-2);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  transition: border-color var(--t-fast), transform var(--t-fast) var(--ease-out), background-color var(--t-fast);
+}
+.card:hover,
+.card[data-destacada='true'] {
+  border-color: var(--line-strong);
+  border-top-color: var(--faixa);
+  background: var(--bg-3);
+}
+.card:active { transform: scale(0.99); }
+
+.topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.via {
+  font-size: 1.15rem;
+  font-variation-settings: 'wdth' 115;
+  text-transform: uppercase;
+}
+.trecho { color: var(--ink-2); font-size: 0.9rem; }
+
+.meio {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.risco {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  color: var(--faixa);
+  line-height: 0.9;
+}
+.risco span { font-size: 2.6rem; font-weight: 600; letter-spacing: -0.04em; }
+.risco small { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-2); }
+
+.grafico { flex: 1; min-width: 0; }
+
+.medidas {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0;
+}
+.medidas dt {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.medidas dd { margin: 2px 0 0; font-size: 0.85rem; }
