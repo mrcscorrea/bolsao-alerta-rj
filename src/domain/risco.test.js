@@ -89,3 +89,19 @@ describe('filtro de vias', () => {
     expect(filtrarVias(vias, { faixa: 'ATENCAO' })).toHaveLength(0)
   })
 })
+
+import { validarRelato, montarRelato, classificarProfundidade } from './relatos.js'
+
+describe('relatos', () => {
+  it('valida campos obrigatórios e limites', () => {
+    const erros = validarRelato({ viaId: '', referencia: 'a', profundidadeCm: 500 })
+    expect(Object.keys(erros).sort()).toEqual(['profundidadeCm', 'referencia', 'viaId'])
+    expect(validarRelato({ viaId: 'praca-bandeira', referencia: 'Sob o viaduto', profundidadeCm: '20' })).toEqual({})
+  })
+  it('monta o objeto da API sem dados pessoais e classifica profundidade', () => {
+    const r = montarRelato({ viaId: 'praca-bandeira', referencia: '  viaduto ', profundidadeCm: '35' }, 'X')
+    expect(r).toEqual({ viaId: 'praca-bandeira', referencia: 'viaduto', profundidadeCm: 35, observacao: '', criadoEm: 'X' })
+    expect(classificarProfundidade(35).faixa).toBe('PERIGO')
+    expect(classificarProfundidade(5).faixa).toBe('NORMAL')
+  })
+})

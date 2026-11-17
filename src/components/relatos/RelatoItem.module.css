@@ -1,0 +1,94 @@
+.item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  list-style: none;
+}
+.item[data-editando='true'] { border-color: var(--signal); box-shadow: 0 0 0 1px var(--signal); }
+
+/* "régua" com a água subindo até a profundidade relatada */
+.profundidade {
+  position: relative;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  height: 80px;
+  border: 1.5px solid var(--faixa);
+  overflow: hidden;
+}
+.profundidade span:first-child {
+  position: relative;
+  z-index: 1;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+.profundidade small {
+  position: relative;
+  z-index: 1;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--ink-2);
+}
+.agua {
+  position: absolute;
+  inset: auto 0 0 0;
+  background: var(--faixa);
+  opacity: 0.25;
+}
+
+.corpo { display: grid; gap: 4px; min-width: 0; }
+.local {
+  font-weight: 800;
+  font-variation-settings: 'wdth' 110;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+}
+.referencia { overflow-wrap: anywhere; }
+.obs { color: var(--ink-2); font-style: italic; overflow-wrap: anywhere; }
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--ink-2);
+}
+
+.acoes {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.acoes button {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.acoes button:hover:not(:disabled) { border-color: var(--ink-2); }
+.acoes button:disabled { opacity: 0.4; cursor: not-allowed; }
+.acoes .perigo {
+  border-color: var(--perigo);
+  background: var(--perigo);
+  color: #fff;
+}
+
+@media (min-width: 640px) {
+  .item { grid-template-columns: 72px 1fr auto; align-items: start; }
+  .acoes {
+    grid-column: auto;
+    flex-direction: column;
+    padding-top: 0;
+    border-top: 0;
+  }
+}
