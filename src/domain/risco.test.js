@@ -61,3 +61,16 @@ describe('análise do histórico', () => {
     expect(piorFaixa(['NORMAL', 'ATENCAO'])).toBe('ATENCAO')
   })
 })
+
+import { simularLeitura, simularHistorico } from '../services/leiturasService.js'
+import { VIAS } from './vias.js'
+
+describe('simulação de leituras', () => {
+  it('é determinística e passa pelas três faixas num ciclo de temporal', () => {
+    const via = VIAS[1]
+    expect(simularLeitura(via, 1_000_000)).toEqual(simularLeitura(via, 1_000_000))
+    const ciclo = simularHistorico(via, 6 * 60_000 * 100, 36)
+    const faixas = new Set(ciclo.map((l) => l.faixa))
+    expect(faixas).toEqual(new Set(['NORMAL', 'ATENCAO', 'PERIGO']))
+  })
+})
