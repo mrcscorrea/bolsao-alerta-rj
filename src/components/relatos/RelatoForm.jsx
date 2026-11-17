@@ -13,7 +13,7 @@ export function RelatoForm({ emEdicao, viaInicial, onSalvar, onCancelar }) {
 
   // ao clicar em "Editar", preenche o formulário com o relato escolhido
   useEffect(() => {
-    if (emEdicao) setDados({ ...VAZIO, ...emEdicao })
+    if (emEdicao) setDados({ ...VAZIO, ...emEdicao, observacao: emEdicao.observacao ?? '' })
     else setDados({ ...VAZIO, viaId: viaInicial ?? '' })
     setErros({})
   }, [emEdicao, viaInicial])
