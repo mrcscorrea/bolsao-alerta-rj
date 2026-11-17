@@ -1,0 +1,122 @@
+.sim {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--line-strong);
+  border-top: 4px solid var(--faixa);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  transition: border-color var(--t-med);
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.som {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: none;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+}
+.som[aria-pressed='true'] {
+  border-color: var(--signal);
+  background: var(--signal);
+  color: var(--signal-ink);
+}
+
+.leitura {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.risco {
+  color: var(--faixa);
+  font-size: clamp(3rem, 9vw, 4.2rem);
+  font-weight: 600;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  transition: color var(--t-med);
+}
+.riscoRotulo {
+  margin-top: 6px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.estado {
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+}
+.faixaTitulo {
+  font-weight: 800;
+  font-variation-settings: 'wdth' 112;
+  text-transform: uppercase;
+  color: var(--faixa);
+  text-align: right;
+}
+
+.controle { display: grid; gap: 4px; }
+.controle label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.controle output { color: var(--accent-text); }
+.controle input {
+  width: 100%;
+  height: 32px;
+  accent-color: var(--signal);
+  cursor: pointer;
+}
+
+.cenarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.cenarios button {
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-2);
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: border-color var(--t-fast), transform var(--t-fast) var(--ease-out);
+}
+.cenarios button:hover { border-color: var(--ink-2); }
+.cenarios button:active { transform: scale(0.96); }
+
+.log {
+  display: grid;
+  gap: 4px;
+  min-height: 76px;
+  margin: 0;
+  padding: 10px 12px;
+  background: #050504;
+  color: #c9c6ba;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  list-style: none;
+}
+.log li { opacity: 0.55; }
+.log li:first-child { opacity: 1; }
+.log b { color: #3fbf7f; }
+.log li[data-faixa='ATENCAO'] b { color: #f2b705; }
+.log li[data-faixa='PERIGO'] b { color: #ff5a46; }
