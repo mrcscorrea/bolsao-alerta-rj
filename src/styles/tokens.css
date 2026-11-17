@@ -1,0 +1,67 @@
+/* ==========================================================
+   Tokens — "sinalização viária à noite sob chuva"
+   O tema muda trocando o atributo data-theme no <html>.
+   ========================================================== */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0e0f0c;          /* asfalto molhado */
+  --bg-2: #161713;
+  --bg-3: #1f201b;
+  --ink: #e9e6dc;
+  --ink-2: #a8a597;
+  --line: #2c2d27;
+  --line-strong: #46473f;
+  --signal: #f2b705;      /* amarelo sódio / faixa de pista */
+  --signal-ink: #0e0f0c;  /* texto sobre o amarelo */
+  --accent-text: #f2b705;
+
+  --normal: #3fbf7f;
+  --atencao: #f2b705;
+  --perigo: #ff5a46;
+  --normal-bg: rgb(63 191 127 / 0.12);
+  --atencao-bg: rgb(242 183 5 / 0.12);
+  --perigo-bg: rgb(255 90 70 / 0.14);
+
+  --water: #2f6f8f;
+  --led-off: #26271f;
+  --shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #eeebe3;          /* papel de boletim */
+  --bg-2: #e4e0d5;
+  --bg-3: #d9d4c6;
+  --ink: #141412;
+  --ink-2: #55534b;
+  --line: #cdc8b9;
+  --line-strong: #a19c8c;
+  --signal: #f2b705;
+  --signal-ink: #141412;
+  --accent-text: #7a5800;
+
+  --normal: #17703f;
+  --atencao: #8a5d00;
+  --perigo: #b8261a;
+  --normal-bg: rgb(23 112 63 / 0.1);
+  --atencao-bg: rgb(242 183 5 / 0.22);
+  --perigo-bg: rgb(184 38 26 / 0.1);
+
+  --water: #2f6f8f;
+  --led-off: #cfcabb;
+  --shadow: none;
+}
+
+:root {
+  --font: 'Archivo', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1280px;
+  --radius: 2px; /* placas têm cantos quase retos */
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 160ms;
+  --t-med: 320ms;
+}
