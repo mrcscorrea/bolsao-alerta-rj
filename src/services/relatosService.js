@@ -6,18 +6,22 @@ import { requisitar } from './http.js'
  * Sem VITE_MOCKAPI_URL configurada, cai num modo local (localStorage) para a
  * demonstração não parar — a interface avisa quando isso acontece.
  */
-const BASE = import.meta.env.VITE_MOCKAPI_URL?.replace(/\/$/, '')
+// o valor de exemplo do .env (SEU_ID) conta como "não configurado"
+const URL_ENV = import.meta.env.VITE_MOCKAPI_URL ?? ''
+const BASE = URL_ENV.includes('SEU_ID') ? '' : URL_ENV.replace(/\/$/, '')
 const URL_RELATOS = `${BASE}/relatos`
 
 export const modoApi = BASE ? 'mockapi' : 'local'
+export const RELATOS_POR_PAGINA = 10
 
 function normalizar(r) {
   return { ...r, id: String(r.id), profundidadeCm: Number(r.profundidadeCm) }
 }
 
 const api = {
-  async listar() {
-    const dados = await requisitar(`${URL_RELATOS}?sortBy=criadoEm&order=desc`)
+  /** Uma página de relatos, mais novos primeiro (página começa em 1, como na MockAPI). */
+  async listar(pagina = 1) {
+    const dados = await requisitar(`${URL_RELATOS}?sortBy=criadoEm&order=desc&page=${pagina}&limit=${RELATOS_POR_PAGINA}`)
     return dados.map(normalizar)
   },
   async criar(relato) {
@@ -40,8 +44,8 @@ const gravar = (lista) => {
 }
 
 const local = {
-  async listar() {
-    return ler()
+  async listar(pagina = 1) {
+    return ler().slice((pagina - 1) * RELATOS_POR_PAGINA, pagina * RELATOS_POR_PAGINA)
   },
   async criar(relato) {
     const novo = { ...relato, id: String(Date.now()) }

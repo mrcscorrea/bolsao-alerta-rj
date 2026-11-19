@@ -10,7 +10,7 @@ import { Aviso } from '../components/ui/Aviso.jsx'
 import styles from './Relatos.module.css'
 
 export function Relatos() {
-  const { relatos, carregando, erro, modoApi, carregar, criar, atualizar, remover } = useRelatos()
+  const { relatos, carregando, erro, modoApi, temMais, carregar, carregarMais, criar, atualizar, remover } = useRelatos()
   const [params] = useSearchParams()
   const [emEdicao, setEmEdicao] = useState(null)
   const [aviso, setAviso] = useState(null)
@@ -60,7 +60,6 @@ export function Relatos() {
   return (
     <div className="container">
       <CabecalhoPagina
-        eyebrow="Relatos do cidadão"
         titulo="Viu um bolsão? Avise quem vem atrás"
         texto="Os sensores cobrem pontos fixos. Os relatos de quem está na rua completam o mapa: publique, corrija ou apague o seu a qualquer momento."
       />
@@ -72,7 +71,7 @@ export function Relatos() {
       )}
 
       <div className={styles.grade}>
-        <div ref={formRef} className={styles.formCol}>
+        <div ref={formRef} className={`${styles.formCol} prancha`}>
           <RelatoForm
             emEdicao={emEdicao}
             viaInicial={params.get('via')}
@@ -83,8 +82,8 @@ export function Relatos() {
 
         <section aria-labelledby="lista-titulo">
           <div className={styles.listaTopo}>
-            <h2 id="lista-titulo" className={styles.listaTitulo}>
-              Relatos recentes <span className="mono">{relatos.length}</span>
+            <h2 id="lista-titulo" className="sr-only">
+              Relatos
             </h2>
             <button type="button" className={styles.recarregar} onClick={carregar}>
               Atualizar
@@ -113,7 +112,7 @@ export function Relatos() {
               <AnimatePresence mode="popLayout" initial={false}>
                 {relatos.map((r) => (
                   <RelatoItem
-                    key={r.id}
+                    key={r.chave ?? r.id}
                     relato={r}
                     emEdicao={emEdicao?.id === r.id}
                     onEditar={editar}
@@ -122,6 +121,11 @@ export function Relatos() {
                 ))}
               </AnimatePresence>
             </ul>
+          )}
+          {temMais && (
+            <button type="button" className={styles.recarregar} onClick={carregarMais} disabled={carregando}>
+              {carregando ? 'Carregando…' : 'Ver relatos mais antigos'}
+            </button>
           )}
         </section>
       </div>

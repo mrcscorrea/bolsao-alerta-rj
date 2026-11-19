@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { relatosService, modoApi } from '../services/relatosService.js'
+import { relatosService, modoApi, RELATOS_POR_PAGINA } from '../services/relatosService.js'
 
 /**
  * Estado + CRUD dos relatos. As mudanças aparecem na hora (otimista) e são
@@ -9,11 +9,17 @@ export function useRelatos() {
   const [relatos, setRelatos] = useState([])
   const [carregando, setCarregando] = useState(true)
   const [erro, setErro] = useState(null)
+  const [pagina, setPagina] = useState(1)
+  const [temMais, setTemMais] = useState(false)
 
+  /** Recomeça da primeira página. */
   const carregar = useCallback(async () => {
     setCarregando(true)
     try {
-      setRelatos(await relatosService.listar())
+      const itens = await relatosService.listar(1)
+      setRelatos(itens)
+      setPagina(1)
+      setTemMais(itens.length === RELATOS_POR_PAGINA)
       setErro(null)
     } catch (e) {
       setErro(e.message)
@@ -21,6 +27,21 @@ export function useRelatos() {
       setCarregando(false)
     }
   }, [])
+
+  /** Busca a próxima página e junta no fim (sem repetir o que já está na tela). */
+  const carregarMais = useCallback(async () => {
+    setCarregando(true)
+    try {
+      const itens = await relatosService.listar(pagina + 1)
+      setRelatos((lista) => [...lista, ...itens.filter((n) => !lista.some((r) => r.id === n.id))])
+      setPagina(pagina + 1)
+      setTemMais(itens.length === RELATOS_POR_PAGINA)
+    } catch (e) {
+      setErro(e.message)
+    } finally {
+      setCarregando(false)
+    }
+  }, [pagina])
 
   useEffect(() => {
     carregar()
@@ -31,7 +52,8 @@ export function useRelatos() {
     setRelatos((lista) => [temporario, ...lista])
     try {
       const salvo = await relatosService.criar(dados)
-      setRelatos((lista) => lista.map((r) => (r.id === temporario.id ? salvo : r)))
+      // mantém a chave do provisório: o item é o mesmo na tela, só ganha o id real
+      setRelatos((lista) => lista.map((r) => (r.id === temporario.id ? { ...salvo, chave: temporario.id } : r)))
       return salvo
     } catch (e) {
       setRelatos((lista) => lista.filter((r) => r.id !== temporario.id))
@@ -50,7 +72,7 @@ export function useRelatos() {
     )
     try {
       const salvo = await relatosService.atualizar(id, dados)
-      setRelatos((lista) => lista.map((r) => (r.id === id ? salvo : r)))
+      setRelatos((lista) => lista.map((r) => (r.id === id ? { ...salvo, chave: r.chave } : r)))
       return salvo
     } catch (e) {
       setRelatos((lista) => lista.map((r) => (r.id === id ? anterior : r)))
@@ -74,5 +96,5 @@ export function useRelatos() {
     }
   }, [])
 
-  return { relatos, carregando, erro, modoApi, carregar, criar, atualizar, remover }
+  return { relatos, carregando, erro, modoApi, temMais, carregar, carregarMais, criar, atualizar, remover }
 }

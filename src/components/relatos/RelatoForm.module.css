@@ -2,15 +2,12 @@
   display: grid;
   gap: 20px;
   padding: clamp(20px, 3vw, 28px);
-  border: 1px solid var(--line);
-  border-top: 4px solid var(--signal);
-  background: var(--bg-2);
+  background: var(--painel);
 }
 
 .titulo {
   font-size: 1.3rem;
-  font-variation-settings: 'wdth' 115;
-  text-transform: uppercase;
+  font-variation-settings: 'wdth' 94;
 }
 
 .campo { display: grid; gap: 8px; }
@@ -26,17 +23,17 @@
 .campo output { font-size: 0.9rem; font-weight: 600; color: var(--accent-text); }
 .opcional { font-weight: 400; color: var(--ink-2); }
 
-.campo input[type='text'],
+.campo input:not([type='range']):not([type='file']),
 .campo select,
 .campo textarea {
   width: 100%;
   min-height: 48px;
   padding: 12px 14px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
-  background: var(--bg);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: var(--bg-3);
   font-size: 1rem;
-  transition: border-color var(--t-fast);
+  transition: border-color var(--t-fast), background-color var(--t-fast);
 }
 .campo textarea { resize: vertical; min-height: 88px; }
 .campo input:focus,
@@ -44,7 +41,8 @@
 .campo textarea:focus {
   outline: none;
   border-color: var(--signal);
-  box-shadow: 0 0 0 1px var(--signal);
+  background: var(--bg);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal) 30%, transparent);
 }
 .campo [aria-invalid='true'] { border-color: var(--perigo); }
 
@@ -57,7 +55,7 @@
 
 .dica {
   padding-left: 10px;
-  border-left: 3px solid var(--faixa);
+  color: var(--faixa);
   font-size: 0.88rem;
 }
 
@@ -81,8 +79,8 @@
 .primario,
 .secundario {
   min-height: 48px;
-  padding: 0 22px;
-  border-radius: var(--radius);
+  padding: 0 26px;
+  border-radius: 999px;
   font-weight: 700;
   transition: transform var(--t-fast) var(--ease-out), opacity var(--t-fast);
 }
@@ -101,3 +99,7 @@
   background: transparent;
 }
 .secundario:hover { border-color: var(--ink-2); }
+
+/* hover "enchente" (global.css) */
+.primario { composes: onda from global; }
+.secundario { composes: onda from global; }

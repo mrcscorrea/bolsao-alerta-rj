@@ -41,19 +41,19 @@ export function RelatoItem({ relato, emEdicao, onEditar, onRemover }) {
       <div className={styles.acoes}>
         {confirmando ? (
           <>
-            <button type="button" className={styles.perigo} onClick={() => onRemover(relato.id)}>
+            <button type="button" className={`${styles.perigo} onda`} onClick={() => onRemover(relato.id)}>
               Excluir
             </button>
-            <button type="button" onClick={() => setConfirmando(false)}>
+            <button type="button" className="onda" onClick={() => setConfirmando(false)}>
               Manter
             </button>
           </>
         ) : (
           <>
-            <button type="button" onClick={() => onEditar(relato)} disabled={relato.pendente}>
+            <button type="button" className="onda" onClick={() => onEditar(relato)} disabled={relato.pendente}>
               Editar
             </button>
-            <button type="button" onClick={() => setConfirmando(true)} disabled={relato.pendente}>
+            <button type="button" className="onda" onClick={() => setConfirmando(true)} disabled={relato.pendente}>
               Remover
             </button>
           </>
