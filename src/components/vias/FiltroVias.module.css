@@ -28,7 +28,7 @@
   font-size: 1.7rem;
   font-weight: 600;
   line-height: 1;
-  color: var(--faixa, var(--ink));
+  color: var(--ink);
 }
 .rotulo {
   font-size: 0.78rem;

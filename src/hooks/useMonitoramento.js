@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { buscarTodas, INTERVALO_MS } from '../services/leiturasService.js'
 import { tendencia, piorFaixa } from '../domain/risco.js'
 
@@ -24,10 +24,18 @@ export function useMonitoramento() {
 
   useEffect(() => {
     atualizar()
-    const id = setInterval(atualizar, INTERVALO_MS)
-    return () => clearInterval(id)
+    // aba escondida não consulta a API; ao voltar, atualiza na hora
+    const id = setInterval(() => !document.hidden && atualizar(), INTERVALO_MS)
+    const aoVoltar = () => !document.hidden && atualizar()
+    document.addEventListener('visibilitychange', aoVoltar)
+    return () => {
+      clearInterval(id)
+      document.removeEventListener('visibilitychange', aoVoltar)
+    }
   }, [atualizar])
 
-  const pior = piorFaixa(estado.vias.map((v) => v.atual.faixa))
-  return { ...estado, pior, atualizar }
+  return useMemo(() => {
+    const pior = piorFaixa(estado.vias.map((v) => v.atual.faixa))
+    return { ...estado, pior, atualizar }
+  }, [estado, atualizar])
 }

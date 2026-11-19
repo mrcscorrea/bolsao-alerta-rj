@@ -38,10 +38,10 @@ export function classificarFaixa(risco) {
   return 'NORMAL'
 }
 
-/** Monta a leitura no mesmo formato de dicionário do Python. */
-export function criarLeitura({ id, horario, viaId, medidas }) {
+/** Monta a leitura no mesmo formato de dicionário do Python. `faixa` vem pronta quando o próprio sensor já classificou. */
+export function criarLeitura({ id, horario, viaId, medidas, faixa }) {
   const risco = calcularRisco(medidas)
-  return { id, horario, viaId, medidas, risco, faixa: classificarFaixa(risco) }
+  return { id, horario, viaId, medidas, risco, faixa: faixa ?? classificarFaixa(risco) }
 }
 
 /** 3 altas seguidas do risco nas últimas leituras = PIORANDO. */
@@ -59,20 +59,6 @@ export function tendencia(leituras) {
   return 'ESTAVEL'
 }
 
-/** Maior sequência contínua de leituras em PERIGO: {inicio, fim, leituras}. */
-export function maiorEpisodioPerigo(leituras) {
-  let melhor = null
-  let atual = null
-  for (const l of leituras) {
-    if (l.faixa === 'PERIGO') {
-      atual = atual ? { ...atual, fim: l.horario, leituras: atual.leituras + 1 } : { inicio: l.horario, fim: l.horario, leituras: 1 }
-      if (!melhor || atual.leituras > melhor.leituras) melhor = atual
-    } else {
-      atual = null
-    }
-  }
-  return melhor
-}
 
 /** Quantas leituras em cada faixa. */
 export function contagemPorFaixa(leituras) {

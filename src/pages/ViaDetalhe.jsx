@@ -1,7 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { useVia } from '../hooks/MonitoramentoContext.jsx'
-import { FAIXAS, ORDEM_FAIXAS } from '../domain/config.js'
-import { contagemPorFaixa, maiorEpisodioPerigo } from '../domain/risco.js'
+import { FAIXAS } from '../domain/config.js'
 import { FaixaBadge, Tendencia } from '../components/ui/FaixaBadge.jsx'
 import { ReguaRisco } from '../components/ui/ReguaRisco.jsx'
 import { Sparkline } from '../components/ui/Sparkline.jsx'
@@ -26,8 +25,6 @@ export function ViaDetalhe() {
 
   const { atual, leituras } = via
   const faixa = FAIXAS[atual.faixa]
-  const contagem = contagemPorFaixa(leituras)
-  const episodio = maiorEpisodioPerigo(leituras)
   const ultimas = leituras.slice(-8).reverse()
 
   return (
@@ -37,35 +34,34 @@ export function ViaDetalhe() {
       </Link>
 
       <header className={styles.cabecalho}>
-        <p className="eyebrow">{via.trecho}</p>
         <h1 className={styles.titulo}>{via.via}</h1>
-        <p className={styles.referencia}>{via.referencia}</p>
+        <p className={styles.referencia}>
+          {via.trecho}. {via.referencia}
+        </p>
       </header>
 
       <section className={styles.status} aria-labelledby="status-titulo">
-        <div className={styles.statusTopo}>
-          <FaixaBadge faixa={atual.faixa} grande />
-          <Tendencia valor={via.tendencia} />
-        </div>
         <h2 id="status-titulo" className={styles.statusTitulo}>
           {faixa.titulo}
         </h2>
-        <p className={styles.statusTexto}>{faixa.texto}</p>
+        <p className={styles.statusTexto}>
+          {faixa.texto} Nas últimas leituras, <Tendencia valor={via.tendencia} />.
+        </p>
 
         <div className={styles.numeros}>
           <div>
-            <span className="eyebrow">Índice de risco</span>
+            <span className={styles.rotulo}>Índice de risco</span>
             <strong className="mono">{atual.risco.toFixed(1)}</strong>
           </div>
           <div>
-            <span className="eyebrow">Lâmina d&apos;água</span>
+            <span className={styles.rotulo}>Lâmina d&apos;água</span>
             <strong className="mono">
               {atual.medidas.laminaCm.toFixed(1)}
               <small> cm</small>
             </strong>
           </div>
           <div>
-            <span className="eyebrow">Chuva</span>
+            <span className={styles.rotulo}>Chuva</span>
             <strong className="mono">
               {atual.medidas.chuvaMmH.toFixed(1)}
               <small> mm/h</small>
@@ -75,53 +71,20 @@ export function ViaDetalhe() {
         <ReguaRisco risco={atual.risco} faixa={atual.faixa} />
       </section>
 
-      <div className={styles.grade}>
-        <section className={styles.bloco} aria-labelledby="hist-titulo">
-          <h2 id="hist-titulo" className={styles.blocoTitulo}>
-            Histórico
-          </h2>
-          <p className={styles.blocoSub}>
-            Últimas {leituras.length} leituras, uma a cada {INTERVALO_MS / 1000} s
-          </p>
-          <div className={styles.grafico}>
-            <Sparkline leituras={leituras} altura={110} detalhado />
-          </div>
-          <div className={styles.eixo}>
-            <span className="mono">{hora(leituras[0].horario)}</span>
-            <span className="mono">{hora(atual.horario)}</span>
-          </div>
-        </section>
-
-        <section className={styles.bloco} aria-labelledby="analise-titulo">
-          <h2 id="analise-titulo" className={styles.blocoTitulo}>
-            Análise do período
-          </h2>
-          <div className={styles.barraFaixas} aria-hidden="true">
-            {ORDEM_FAIXAS.map((f) => (
-              <span key={f} data-faixa={f} style={{ flexGrow: contagem[f] }} />
-            ))}
-          </div>
-          <ul className={styles.contagem}>
-            {ORDEM_FAIXAS.map((f) => (
-              <li key={f} data-faixa={f}>
-                <span className={styles.bolinha} />
-                {FAIXAS[f].rotulo}
-                <span className="mono">{contagem[f]}</span>
-              </li>
-            ))}
-          </ul>
-          <p className={styles.episodio}>
-            {episodio
-              ? `Maior episódio em PERIGO: ${episodio.leituras} leituras seguidas, das ${hora(episodio.inicio)} às ${hora(episodio.fim)}.`
-              : 'Nenhum episódio em PERIGO no período.'}
-          </p>
-        </section>
-      </div>
-
-      <section className={styles.bloco} aria-labelledby="leituras-titulo">
-        <h2 id="leituras-titulo" className={styles.blocoTitulo}>
-          Últimas leituras
+      <section className={styles.bloco} aria-labelledby="hist-titulo">
+        <h2 id="hist-titulo" className={styles.blocoTitulo}>
+          Últimas {leituras.length} leituras
         </h2>
+        <p className={styles.blocoSub}>
+          {via.fonte === 'thingspeak' ? 'Sensor real, pelo ThingSpeak, a cada 15 s.' : `Simuladas, uma a cada ${INTERVALO_MS / 1000} s.`}
+        </p>
+        <div className={styles.grafico}>
+          <Sparkline leituras={leituras} altura={110} detalhado />
+        </div>
+        <div className={styles.eixo}>
+          <span className="mono">{hora(leituras[0].horario)}</span>
+          <span className="mono">{hora(atual.horario)}</span>
+        </div>
         <div className={styles.tabelaWrap}>
           <table className={styles.tabela}>
             <thead>

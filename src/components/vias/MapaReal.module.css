@@ -1,0 +1,135 @@
+.mapa {
+  position: relative;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-2);
+}
+
+.caixa {
+  height: clamp(460px, calc(100svh - 190px), 900px);
+}
+
+.carregando {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: clamp(460px, calc(100svh - 190px), 900px);
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--ink-2);
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 40px 40px,
+    var(--bg-2);
+}
+
+/* ---------- marcadores dos sensores ---------- */
+.marcador {
+  --cor: var(--normal);
+  position: relative;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.marcador[data-faixa='ATENCAO'] { --cor: var(--atencao); }
+.marcador[data-faixa='PERIGO'] { --cor: var(--perigo); }
+
+.nucleo {
+  position: absolute;
+  inset: 3px;
+  border: 3px solid var(--cor);
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: 0 0 0 2px var(--bg);
+  transition: transform var(--t-fast) var(--ease-out), border-color var(--t-med);
+}
+.nucleo::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--cor);
+}
+.marcador:hover .nucleo,
+.marcador:focus-visible .nucleo,
+.marcador[data-ativo='true'] .nucleo { transform: scale(1.35); }
+
+.onda {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--cor);
+  opacity: 0;
+}
+.marcador[data-faixa='PERIGO'] .onda { animation: onda 1.8s var(--ease-out) infinite; }
+@keyframes onda {
+  from { transform: scale(0.8); opacity: 0.9; }
+  to { transform: scale(3); opacity: 0; }
+}
+
+.rotulo {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 4px);
+  transform: translateX(-50%);
+  padding: 1px 6px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid var(--line-strong);
+  pointer-events: none;
+}
+
+/* ---------- popup das estações ---------- */
+.popup :global(.maplibregl-popup-content) {
+  padding: 6px 10px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  box-shadow: none;
+}
+.popup :global(.maplibregl-popup-tip) { display: none; }
+
+/* ---------- legenda ---------- */
+.legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  font-size: 0.78rem;
+  color: var(--ink-2);
+}
+.legenda span { display: inline-flex; align-items: center; gap: 8px; }
+.legenda i { display: inline-block; }
+.legVia { width: 18px; height: 3px; background: var(--signal); }
+.legEstacao { width: 8px; height: 8px; border-radius: 50%; background: var(--water); }
+.legSensor { width: 10px; height: 10px; border-radius: 50%; border: 2.5px solid var(--normal); }
+
+/* controles do MapLibre no tema do site */
+.mapa :global(.maplibregl-ctrl-group) {
+  border-radius: var(--radius);
+  background: var(--bg);
+  box-shadow: 0 0 0 1px var(--line-strong);
+}
+.mapa :global(.maplibregl-ctrl-group button + button) { border-top-color: var(--line); }
+:global([data-theme='dark']) .mapa :global(.maplibregl-ctrl-icon) { filter: invert(1); }
+.mapa :global(.maplibregl-ctrl-attrib) { font-size: 0.65rem; }
+
+/* ---------- versão compacta (mini-mapa da landing) ---------- */
+.compacto .caixa,
+.compacto .carregando { height: clamp(380px, 68svh, 720px); }
+.marcador[data-fora='true'] { opacity: 0.25; }
+.marcador[data-fora='true'] .rotulo { display: none; }
+.marcador { transition: opacity var(--t-med); }

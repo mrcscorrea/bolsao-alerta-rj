@@ -1,22 +1,22 @@
 import { FAIXAS } from '../../domain/config.js'
 import styles from './FaixaBadge.module.css'
 
-export function FaixaBadge({ faixa, grande = false }) {
+/** Nome da faixa escrito na cor dela. Sem caixinha: a cor e a palavra bastam. */
+export function FaixaBadge({ faixa }) {
   return (
-    <span className={`${styles.badge} ${grande ? styles.grande : ''}`} data-faixa={faixa}>
-      <span className={styles.ponto} aria-hidden="true" />
+    <span className={styles.faixa} data-faixa={faixa}>
       {FAIXAS[faixa].rotulo}
     </span>
   )
 }
 
-const SETAS = { PIORANDO: '↗', MELHORANDO: '↘', ESTAVEL: '→' }
-const ROTULOS = { PIORANDO: 'Piorando', MELHORANDO: 'Melhorando', ESTAVEL: 'Estável' }
+const ROTULOS = { PIORANDO: 'subindo', MELHORANDO: 'baixando', ESTAVEL: 'estável' }
 
+/** Tendência das últimas leituras, em palavra: "água subindo", "água estável"... */
 export function Tendencia({ valor }) {
   return (
     <span className={styles.tendencia} data-tendencia={valor}>
-      <span aria-hidden="true">{SETAS[valor]}</span> {ROTULOS[valor]}
+      água {ROTULOS[valor]}
     </span>
   )
 }

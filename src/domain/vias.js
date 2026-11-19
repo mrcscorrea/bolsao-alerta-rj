@@ -1,12 +1,14 @@
 /**
  * Pontos monitorados (dados simulados). As vias foram escolhidas a partir de
  * ocorrências reais de bolsões noticiadas (ver Fontes no rodapé do site).
- * x/y = posição no mapa esquemático (SVG 800 x 520). `sensibilidade` define
+ * lng/lat = coordenadas reais (OpenStreetMap/Nominatim).
+ * x/y = posição no mapa esquemático (SVG 800 x 520), usado como plano B. `sensibilidade` define
  * o quanto o ponto alaga no cenário simulado (0 a 1).
  */
 export const VIAS = [
   {
     id: 'av-brasil-caju',
+    lng: -43.2331, lat: -22.8869,
     via: 'Av. Brasil',
     trecho: 'Caju · km 2',
     referencia: 'Altura do Cemitério do Caju, sentido Centro',
@@ -15,6 +17,7 @@ export const VIAS = [
   },
   {
     id: 'av-brasil-mare',
+    lng: -43.2482, lat: -22.8457,
     via: 'Av. Brasil',
     trecho: 'Maré · km 12',
     referencia: 'Altura da Vila do João, pista central',
@@ -23,6 +26,7 @@ export const VIAS = [
   },
   {
     id: 'av-brasil-cordovil',
+    lng: -43.2912, lat: -22.8154,
     via: 'Av. Brasil',
     trecho: 'Cordovil · km 18',
     referencia: 'Próximo à passarela de Cordovil',
@@ -31,14 +35,16 @@ export const VIAS = [
   },
   {
     id: 'linha-vermelha-sao-cristovao',
+    lng: -43.2323, lat: -22.8782,
     via: 'Linha Vermelha',
-    trecho: 'São Cristóvão',
-    referencia: 'Saída para São Cristóvão, sentido Baixada',
+    trecho: 'Fundão · Caju',
+    referencia: 'Trecho junto ao Caju, sentido Ilha do Fundão',
     x: 720, y: 270, rotulo: 'direita',
     sensibilidade: 0.6, fase: 0.2,
   },
   {
     id: 'estrada-galeao',
+    lng: -43.1998, lat: -22.8062,
     via: 'Estrada do Galeão',
     trecho: 'Ilha do Governador',
     referencia: 'Trecho que alagou e arrastou carros em jul/2025',
@@ -47,6 +53,7 @@ export const VIAS = [
   },
   {
     id: 'linha-amarela-bonsucesso',
+    lng: -43.2562, lat: -22.8718,
     via: 'Linha Amarela',
     trecho: 'Bonsucesso',
     referencia: 'Acesso pela Av. Brasil, sentido Barra',
@@ -55,6 +62,7 @@ export const VIAS = [
   },
   {
     id: 'praca-bandeira',
+    lng: -43.2132, lat: -22.9112,
     via: 'Praça da Bandeira',
     trecho: 'Tijuca · Maracanã',
     referencia: 'Rua Mariz e Barros, sob o viaduto',
@@ -63,6 +71,7 @@ export const VIAS = [
   },
   {
     id: 'tunel-reboucas',
+    lng: -43.2075, lat: -22.9285,
     via: 'Túnel Rebouças',
     trecho: 'Acesso Rio Comprido',
     referencia: 'Entrada do túnel, sentido Lagoa',

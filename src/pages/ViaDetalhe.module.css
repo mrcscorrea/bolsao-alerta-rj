@@ -19,10 +19,9 @@
 .cabecalho { display: grid; gap: 10px; }
 .titulo {
   font-size: clamp(2.6rem, 9vw, 6.5rem);
-  font-variation-settings: 'wdth' 122;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
+  font-variation-settings: 'wdth' 94;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 .referencia { color: var(--ink-2); }
 
@@ -31,20 +30,12 @@
   gap: 14px;
   padding: clamp(20px, 4vw, 36px);
   border: 1px solid var(--line);
-  border-left: 6px solid var(--faixa);
-  background: var(--faixa-bg);
-}
-.statusTopo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  background: var(--bg-2);
 }
 .statusTitulo {
   font-size: clamp(1.8rem, 5vw, 3rem);
-  font-variation-settings: 'wdth' 110;
+  font-variation-settings: 'wdth' 94;
   color: var(--faixa);
-  text-transform: uppercase;
 }
 .statusTexto { font-size: 1.1rem; max-width: 50ch; }
 
@@ -55,21 +46,15 @@
   margin: 8px 0 4px;
 }
 .numeros div { display: grid; gap: 4px; }
+.rotulo { font-size: 0.85rem; color: var(--ink-2); }
 .numeros strong {
   font-size: clamp(1.5rem, 5vw, 2.6rem);
   font-weight: 600;
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
 }
 .numeros small { font-size: 0.45em; color: var(--ink-2); letter-spacing: 0; }
 
-.grade {
-  display: grid;
-  gap: 24px;
-}
-@media (min-width: 900px) {
-  .grade { grid-template-columns: 1.5fr 1fr; }
-}
 
 .bloco {
   display: grid;
@@ -81,8 +66,7 @@
 }
 .blocoTitulo {
   font-size: 1.1rem;
-  font-variation-settings: 'wdth' 115;
-  text-transform: uppercase;
+  font-variation-settings: 'wdth' 94;
 }
 .blocoSub { font-size: 0.85rem; color: var(--ink-2); margin-top: -6px; }
 
@@ -94,31 +78,6 @@
   color: var(--ink-2);
 }
 
-.barraFaixas {
-  display: flex;
-  gap: 2px;
-  height: 14px;
-}
-.barraFaixas span { flex-basis: 0; background: var(--faixa); }
-
-.contagem {
-  display: grid;
-  gap: 6px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.contagem li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--line);
-}
-.contagem li .mono { margin-left: auto; }
-.bolinha { width: 10px; height: 10px; background: var(--faixa); }
-
-.episodio { font-size: 0.92rem; color: var(--ink-2); }
 
 .tabelaWrap { overflow-x: auto; margin-inline: -20px; padding-inline: 20px; }
 .tabela {
@@ -133,9 +92,8 @@
   font-family: var(--mono);
   font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.01em;
   text-align: left;
-  text-transform: uppercase;
   color: var(--ink-2);
 }
 .tabela td {
@@ -165,6 +123,8 @@
   text-decoration: none;
   font-weight: 700;
 }
-.ctaBotao:hover { opacity: 0.9; }
 
 .vazio { padding: 96px 0; display: grid; gap: 16px; }
+
+/* hover "enchente" (global.css) */
+.ctaBotao { composes: onda from global; }

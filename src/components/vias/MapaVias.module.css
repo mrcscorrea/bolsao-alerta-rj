@@ -35,10 +35,10 @@
 
 .nomeVia,
 .nomeCentro {
-  font-family: var(--font);
+  font-family: var(--font-display);
   font-size: 13px;
   font-weight: 800;
-  font-variation-settings: 'wdth' 120;
+  font-variation-settings: 'wdth' 94;
   letter-spacing: 0.08em;
   fill: var(--ink-2);
 }

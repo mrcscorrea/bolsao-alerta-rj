@@ -4,8 +4,8 @@
   align-items: start;
 }
 @media (min-width: 1000px) {
-  .grade { grid-template-columns: 1.15fr 1fr; gap: 32px; }
-  .mapaCol { position: sticky; top: 120px; }
+  .grade { grid-template-columns: minmax(0, 1.7fr) minmax(340px, 1fr); gap: 40px; }
+  .mapaCol { position: sticky; top: 110px; }
 }
 
 .esqueleto {
@@ -32,6 +32,30 @@
 .erro {
   margin-bottom: 16px;
   padding: 12px 16px;
-  border-left: 4px solid var(--perigo);
+  border: 1px solid var(--perigo);
   background: var(--perigo-bg);
+}
+
+.alternar {
+  display: inline-flex;
+  margin-bottom: 10px;
+  border: 1px solid var(--line-strong);
+}
+.alternar button {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 0;
+  background: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.alternar button[aria-pressed='true'] {
+  background: var(--signal);
+  color: var(--signal-ink);
+}
+.aviso {
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+  color: var(--ink-2);
 }

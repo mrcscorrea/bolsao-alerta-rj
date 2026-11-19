@@ -50,17 +50,24 @@ export function simularHistorico(via, agora = Date.now(), quantidade = 36) {
   return leituras
 }
 
-/** Leitura real do canal ThingSpeak: field1 = lâmina (cm), field2 = chuva (mm/h). */
+/** Severidade publicada pelo ESP32 (field3) → faixa do site. */
+const SEVERIDADE = ['NORMAL', 'ATENCAO', 'PERIGO']
+
+/**
+ * Leitura real do canal ThingSpeak: field2 = nível da água (cm), field3 = severidade 0/1/2.
+ * O canal não tem pluviômetro, então a chuva entra como 0 e a faixa é a que o sensor calculou.
+ */
 async function buscarThingSpeak(quantidade) {
   const dados = await requisitar(`https://api.thingspeak.com/channels/${TS_CANAL}/feeds.json?results=${quantidade}`)
   return dados.feeds
-    .filter((f) => f.field1 != null && f.field2 != null)
+    .filter((f) => f.field2 != null)
     .map((f) =>
       criarLeitura({
         id: f.entry_id,
         horario: f.created_at,
         viaId: TS_VIA,
-        medidas: { laminaCm: Number(f.field1), chuvaMmH: Number(f.field2) },
+        medidas: { laminaCm: Number(f.field2), chuvaMmH: 0 },
+        faixa: SEVERIDADE[Number(f.field3)],
       }),
     )
 }

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
-  normalizar, calcularRisco, classificarFaixa, tendencia, maiorEpisodioPerigo,
-  contagemPorFaixa, validarConfig, piorFaixa,
+  normalizar, calcularRisco, classificarFaixa, tendencia,
+  contagemPorFaixa, validarConfig, piorFaixa, criarLeitura,
 } from './risco.js'
 
 describe('índice de risco', () => {
@@ -50,11 +50,6 @@ describe('análise do histórico', () => {
     expect(tendencia(serie([10, 20]))).toBe('ESTAVEL')
   })
 
-  it('encontra o maior episódio contínuo em PERIGO', () => {
-    const ep = maiorEpisodioPerigo(serie([80, 10, 75, 90, 71, 20]))
-    expect(ep).toEqual({ inicio: 't2', fim: 't4', leituras: 3 })
-    expect(maiorEpisodioPerigo(serie([10, 20]))).toBeNull()
-  })
 
   it('conta por faixa e acha a pior', () => {
     expect(contagemPorFaixa(serie([10, 50, 80, 90]))).toEqual({ NORMAL: 1, ATENCAO: 1, PERIGO: 2 })
@@ -103,5 +98,27 @@ describe('relatos', () => {
     expect(r).toEqual({ viaId: 'praca-bandeira', referencia: 'viaduto', profundidadeCm: 35, observacao: '', criadoEm: 'X' })
     expect(classificarProfundidade(35).faixa).toBe('PERIGO')
     expect(classificarProfundidade(5).faixa).toBe('NORMAL')
+  })
+})
+
+import { ROTAS, avaliarRota } from './rotas.js'
+
+describe('rotas', () => {
+  it('a rota assume a faixa do pior ponto', () => {
+    const vias = [
+      { id: 'praca-bandeira', atual: { faixa: 'NORMAL', risco: 10 } },
+      { id: 'tunel-reboucas', atual: { faixa: 'PERIGO', risco: 80 } },
+    ]
+    const r = avaliarRota(ROTAS.find((x) => x.id === 'tijuca-zonasul'), vias)
+    expect(r.faixa).toBe('PERIGO')
+    expect(r.piorPonto.id).toBe('tunel-reboucas')
+  })
+})
+
+describe('criarLeitura', () => {
+  it('usa a faixa do sensor quando ele já classificou (ThingSpeak field3)', () => {
+    const base = { id: 1, horario: '', viaId: 'x', medidas: { laminaCm: 36, chuvaMmH: 0 } }
+    expect(criarLeitura({ ...base, faixa: 'NORMAL' }).faixa).toBe('NORMAL')
+    expect(criarLeitura(base).faixa).toBe(classificarFaixa(criarLeitura(base).risco))
   })
 })
