@@ -1,0 +1,8 @@
+# Cache no navegador (Netlify / Cloudflare Pages). Na Vercel, o mesmo está em vercel.json.
+# /assets: nomes com hash (mudam a cada build), então podem ficar 1 ano.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+/fotos/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+/index.html
+  Cache-Control: no-cache
