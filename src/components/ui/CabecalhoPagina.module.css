@@ -5,11 +5,11 @@
 }
 
 .titulo {
+  font-family: var(--font-display);
   font-size: clamp(2.3rem, 6.4vw, 4.6rem);
-  font-variation-settings: 'wdth' 118;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
+  font-variation-settings: 'wdth' 94;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   max-width: 16ch;
 }
 
@@ -19,22 +19,5 @@
   font-size: 1.05rem;
 }
 
-.fonte {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  color: var(--ink-2);
-}
+.fonte { font-size: 0.9rem; color: var(--ink-2); }
 
-.aoVivo {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--normal);
-  animation: pulso 2s ease-in-out infinite;
-}
-@keyframes pulso {
-  50% { opacity: 0.3; }
-}

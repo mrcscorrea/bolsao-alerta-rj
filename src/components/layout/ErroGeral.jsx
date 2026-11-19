@@ -19,7 +19,6 @@ export class ErroGeral extends Component {
     if (!this.state.erro) return this.props.children
     return (
       <div className="container" style={{ padding: '96px 16px' }} role="alert">
-        <p className="eyebrow">Algo deu errado</p>
         <h1 style={{ fontSize: 'clamp(2rem, 6vw, 3.5rem)', margin: '12px 0 16px', textTransform: 'uppercase' }}>
           Via temporariamente interditada.
         </h1>

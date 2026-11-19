@@ -1,65 +1,79 @@
 /* ==========================================================
-   Tokens — "sinalização viária à noite sob chuva"
+   Tokens — "placa de orientação"
+   Escuro: azul das placas de via (#002893) com letras brancas.
+   Claro: a mesma placa invertida, fundo branco e tinta azul.
+   Laranja (#FD701C) só no que se clica; risco usa verde/amarelo/vermelho.
    O tema muda trocando o atributo data-theme no <html>.
    ========================================================== */
 :root,
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --bg: #0e0f0c;          /* asfalto molhado */
-  --bg-2: #161713;
-  --bg-3: #1f201b;
-  --ink: #e9e6dc;
-  --ink-2: #a8a597;
-  --line: #2c2d27;
-  --line-strong: #46473f;
-  --signal: #f2b705;      /* amarelo sódio / faixa de pista */
-  --signal-ink: #0e0f0c;  /* texto sobre o amarelo */
-  --accent-text: #f2b705;
+  --bg: #002893;          /* azul de placa */
+  --bg-2: #00227f;        /* painéis um tom abaixo: o texto ganha contraste */
+  --bg-3: #0a33a3;
+  --ink: #ffffff;
+  --ink-2: #bcc8f0;
+  --line: #1f48b8;
+  --line-strong: #4a6fd0;
+  --signal: #fd701c;      /* laranja: botões, menu ativo, marca */
+  --signal-ink: #001a66;
+  --accent-text: #ff9a55;
 
-  --normal: #3fbf7f;
-  --atencao: #f2b705;
-  --perigo: #ff5a46;
-  --normal-bg: rgb(63 191 127 / 0.12);
-  --atencao-bg: rgb(242 183 5 / 0.12);
-  --perigo-bg: rgb(255 90 70 / 0.14);
+  --normal: #4ade80;
+  --atencao: #ffd23f;
+  --perigo: #ff7373;      /* vermelho mais claro possível sem virar laranja (4,6:1 no azul) */
+  --normal-bg: rgb(74 222 128 / 0.14);
+  --atencao-bg: rgb(255 210 63 / 0.14);
+  --perigo-bg: rgb(255 115 115 / 0.16);
 
-  --water: #2f6f8f;
-  --led-off: #26271f;
-  --shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset;
+  --water: #8fd3ff;
+  --water-deep: #001a66;
+  --led-off: #0d2f8f;
+  --shadow: 0 1px 0 rgb(255 255 255 / 0.05) inset;
+  --grade: rgb(255 255 255 / 0.05);   /* papel quadriculado */
+  --painel: #00227f;
+  --sombra-painel: 0 6px 16px -8px rgb(0 10 50 / 0.6);
 }
 
 :root[data-theme='light'] {
   color-scheme: light;
-  --bg: #eeebe3;          /* papel de boletim */
-  --bg-2: #e4e0d5;
-  --bg-3: #d9d4c6;
-  --ink: #141412;
-  --ink-2: #55534b;
-  --line: #cdc8b9;
-  --line-strong: #a19c8c;
-  --signal: #f2b705;
-  --signal-ink: #141412;
-  --accent-text: #7a5800;
+  --bg: #ffffff;
+  --bg-2: #f1f4fb;
+  --bg-3: #e1e7f6;
+  --ink: #002893;
+  --ink-2: #4a5a8a;
+  --line: #d5dcef;
+  --line-strong: #9aa8d6;
+  --signal: #f0640f;      /* um tom abaixo do #FD701C para o foco passar de 3:1 no branco */
+  --signal-ink: #001a66;
+  --accent-text: #b84a00;
 
-  --normal: #17703f;
-  --atencao: #8a5d00;
-  --perigo: #b8261a;
-  --normal-bg: rgb(23 112 63 / 0.1);
-  --atencao-bg: rgb(242 183 5 / 0.22);
-  --perigo-bg: rgb(184 38 26 / 0.1);
+  --normal: #13804a;
+  --atencao: #8a6200;
+  --perigo: #c42b1c;
+  --normal-bg: rgb(19 128 74 / 0.1);
+  --atencao-bg: rgb(255 210 63 / 0.25);
+  --perigo-bg: rgb(196 43 28 / 0.1);
 
-  --water: #2f6f8f;
-  --led-off: #cfcabb;
+  --water: #1f5fd6;
+  --water-deep: #002893;
+  --led-off: #d5dcef;
   --shadow: none;
+  --grade: rgb(0 40 147 / 0.06);
+  --painel: #f7f9fe;
+  --sombra-painel: 0 6px 16px -8px rgb(0 40 147 / 0.25);
 }
 
 :root {
-  --font: 'Archivo', system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-serif: var(--font-display);
   --mono: 'JetBrains Mono', ui-monospace, monospace;
 
   --gutter: clamp(16px, 4vw, 48px);
   --max: 1280px;
-  --radius: 2px; /* placas têm cantos quase retos */
+  --radius: 4px;
+  --radius-lg: 16px;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --t-fast: 160ms;

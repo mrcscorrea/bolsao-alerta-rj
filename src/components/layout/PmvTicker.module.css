@@ -2,7 +2,7 @@
 .pmv {
   position: relative;
   height: 38px;
-  background: #050504;
+  background: #04141b;
   border-bottom: 1px solid var(--line);
   overflow: hidden;
 }
@@ -31,7 +31,6 @@
   /* "pontos de LED": máscara pontilhada sobre o texto */
   mask-image: radial-gradient(circle, #000 55%, transparent 65%);
   mask-size: 2.6px 2.6px;
-  filter: drop-shadow(0 0 4px var(--pmv));
 }
 
 /* cores fixas do painel (não mudam com o tema) */

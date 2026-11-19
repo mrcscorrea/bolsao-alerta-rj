@@ -19,7 +19,7 @@ export function PmvTicker() {
   if (carregando && vias.length === 0) return <div className={styles.pmv} aria-hidden="true" />
 
   const mensagens = montarMensagens(vias)
-  const texto = mensagens.join('   ◆   ').toUpperCase() + '   ◆   '
+  const texto = mensagens.join('   /   ').toUpperCase() + '   /   '
   const duracao = Math.max(16, texto.length * 0.2)
 
   return (

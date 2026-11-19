@@ -17,11 +17,11 @@
 }
 
 .titulo {
+  font-family: var(--font-display);
   margin-bottom: 12px;
-  font-weight: 900;
-  font-variation-settings: 'wdth' 120;
+  font-weight: 800;
+  font-variation-settings: 'wdth' 94;
   font-size: 1.1rem;
-  text-transform: uppercase;
 }
 
 .texto {
@@ -29,25 +29,6 @@
   color: var(--ink-2);
 }
 
-.ods {
-  margin: 20px 0 0;
-  padding: 0;
-  list-style: none;
-  font-size: 0.9rem;
-  line-height: 2;
-}
-.ods span {
-  display: inline-block;
-  min-width: 64px;
-  margin-right: 8px;
-  padding: 0 6px;
-  background: var(--signal);
-  color: var(--signal-ink);
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-align: center;
-}
 
 .fontes {
   margin: 12px 0 0;
@@ -67,3 +48,4 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+.texto + .texto { margin-top: 12px; }
