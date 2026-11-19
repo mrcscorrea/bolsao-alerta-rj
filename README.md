@@ -2,6 +2,8 @@
 
 Site que mostra, antes de o motorista sair de casa, se as vias que mais alagam no Rio estão com bolsão d'água. Projeto da Global Solution 2026.2 da FIAP (Engenharia de Software, 1º ano), disciplinas de Front-end Design e Web Development.
 
+**Site no ar:** https://bolsao-alerta-rj.vercel.app
+
 ## Ficha da CitizenTech
 
 | | |
@@ -12,7 +14,7 @@ Site que mostra, antes de o motorista sair de casa, se as vias que mais alagam n
 | **Problema, em uma frase** | Em temporal, bolsões d'água se formam em minutos nas vias expressas do Rio e o motorista só descobre quando já está dentro deles, sem tempo de desviar. |
 | **Como funciona** | Um sensor ultrassônico mede a lâmina d'água na pista e um pluviômetro mede a chuva. O ESP32 envia as leituras para o ThingSpeak, o script Python calcula o Índice de Risco (0 a 100) e o site mostra cada via em Normal, Atenção ou Perigo. |
 | **O que cada parte faz** | **Edge (ESP32):** lê os dois sensores e acende LED e buzzer no local. **Python:** classifica o risco e gera os alertas. **Site (este repositório):** painel com mapa, histórico por via, simulador, relatos dos cidadãos e fórum. **DPS:** modela o cálculo do índice. **Pitch:** conta a história. |
-| **Link do repositório** | https://github.com/mrcscorrea/bolsao-alerta-rj |
+| **Link do repositório** | https://github.com/mrcscorrea/bolsao-alerta-rj (site: https://bolsao-alerta-rj.vercel.app) |
 | **Indicador de impacto** | Quantos motoristas consultam a via antes de sair e desistem de passar por um ponto em Perigo (consultas ao painel com a via em Perigo e relatos confirmando o desvio). |
 | **ODS conectados** | **ODS 11**, cidades e comunidades sustentáveis: mobilidade mais segura em dia de chuva. **ODS 13**, ação contra a mudança do clima: adaptação a chuvas extremas cada vez mais frequentes. |
 
@@ -127,3 +129,7 @@ Três leituras seguidas subindo marcam a via como "água subindo". Os valores fi
 ## Licença
 
 MIT, veja [LICENSE](LICENSE).
+
+## Link do Projeto em Produção
+
+https://
