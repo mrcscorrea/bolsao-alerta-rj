@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 
-const CORES_BARRA = { dark: '#0E0F0C', light: '#EEEBE3' }
+const CORES_BARRA = { dark: '#002893', light: '#FFFFFF' }
 
 /** Modo claro/escuro: lê o tema aplicado no <html>, troca e salva a escolha. */
 export function useTheme() {
