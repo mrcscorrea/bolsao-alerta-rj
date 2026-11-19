@@ -1,0 +1,93 @@
+.figura {
+  margin: 0;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--bg-2);
+}
+
+/* no celular o desenho mantém a escala legível e rola de lado */
+.rolagem {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.svg {
+  min-width: 860px;
+  width: 100%;
+  height: auto;
+  font-family: var(--mono);
+}
+
+.chuva line { stroke: var(--water); stroke-width: 1.5; opacity: 0.5; }
+.asfalto { fill: var(--bg-3); }
+.calcada { fill: var(--line-strong); }
+.faixaPista { stroke: var(--ink); stroke-width: 3; }
+.agua { fill: var(--water); opacity: 0.55; }
+
+.carro path:first-child { fill: #f2b705; }
+.faixaAzul { fill: #1f4fa0; }
+.vidro { fill: #10161c; }
+.roda { fill: #0d0d0d; }
+
+.poste { fill: var(--ink-2); }
+.sensor { fill: #1c5e9e; }
+.olho { fill: #c9c9c2; stroke: #6b6b64; stroke-width: 2; }
+.pulsos path {
+  fill: none;
+  stroke: var(--water);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  animation: pulso 1.8s ease-out infinite;
+}
+.pulsos path:nth-child(2) { animation-delay: 0.3s; }
+.pulsos path:nth-child(3) { animation-delay: 0.6s; }
+@keyframes pulso {
+  0%, 100% { opacity: 0.15; }
+  30% { opacity: 1; }
+}
+
+.cota line,
+.cotaBase line { stroke-width: 1.5; stroke-dasharray: 5 5; }
+.cota line,
+.cota path { stroke: var(--accent-text); fill: none; stroke-width: 1.5; }
+.cota text { fill: var(--accent-text); font-size: 15px; font-weight: 600; }
+.cotaBase line,
+.cotaBase path { stroke: var(--ink-2); fill: none; stroke-width: 1.5; }
+.cotaBase text { fill: var(--ink-2); font-size: 15px; }
+
+.lamina path { stroke: var(--ink); stroke-width: 1.5; fill: none; }
+.lamina text { fill: var(--ink); font-size: 15px; font-weight: 600; }
+
+.rotulo { fill: var(--ink); font-size: 14px; }
+.sub { fill: var(--ink-2); font-size: 12px; font-weight: 400; }
+
+.esp { fill: #0f3d2e; stroke: #2fa36b; stroke-width: 1.5; }
+.espTexto { fill: #e9e6dc; font-size: 13px; font-weight: 600; }
+.ledVerde { fill: #3fbf7f; }
+.ledAmarelo { fill: #f2b705; }
+.ledVermelho { fill: #ff5a46; }
+
+.dados {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 2;
+  stroke-dasharray: 2 8;
+  stroke-linecap: round;
+  animation: fluxo 1.2s linear infinite;
+}
+@keyframes fluxo { to { stroke-dashoffset: -20; } }
+
+.nuvem,
+.caixa { fill: var(--bg); stroke: var(--ink); stroke-width: 1.5; }
+.caixaTexto { fill: var(--ink); font-size: 14px; font-weight: 600; }
+.celular { fill: var(--ink); }
+.tela { fill: #0e0f0c; }
+.telaTexto { fill: #f2b705; font-size: 22px; font-weight: 600; }
+
+.legenda {
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  font-size: 0.8rem;
+  color: var(--ink-2);
+}

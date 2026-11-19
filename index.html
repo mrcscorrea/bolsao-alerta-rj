@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content="Bolsão Alerta RJ — monitoramento em tempo real de bolsões d'água nas vias críticas do Rio de Janeiro." />
-    <meta name="theme-color" content="#0E0F0C" />
+    <meta name="theme-color" content="#002893" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=JetBrains+Mono:wght@400..700&display=swap" rel="stylesheet" />
     <script>
       // aplica o tema salvo antes do primeiro paint (evita "flash" de tema errado)
       try {
@@ -17,9 +17,101 @@
         document.documentElement.dataset.theme = t;
       } catch (e) { document.documentElement.dataset.theme = 'dark'; }
     </script>
+    <style>
+      /* tela de carregamento: aparece antes do React, some em src/carregamento.js */
+      #carregando {
+        --onda: #00227f; --fundo: #002893; --tinta: #ffffff; --agua: #8fd3ff;
+        position: fixed; inset: 0; z-index: 1000;
+        display: grid; place-items: center;
+        overflow: hidden;
+        background: var(--fundo);
+        color: var(--tinta);
+        font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+        transition: transform 900ms cubic-bezier(0.76, 0, 0.24, 1);
+      }
+      [data-theme='light'] #carregando { --onda: #f1f4fb; --fundo: #ffffff; --tinta: #002893; --agua: #1f5fd6; }
+      /* ondas do calçadão de Copacabana (pedra portuguesa) */
+      #carregando::before {
+        content: ''; position: absolute; inset: -40px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='48'%3E%3Cpath d='M0 12 Q30 -6 60 12 T120 12 M0 36 Q30 18 60 36 T120 36' fill='none' stroke='%23000' stroke-width='12'/%3E%3C/svg%3E");
+        opacity: 0.1;
+        animation: onda-mar 6s linear infinite;
+      }
+      [data-theme='dark'] #carregando::before { filter: invert(1); opacity: 0.04; }
+      #carregando .agua {
+        position: absolute; inset: auto 0 0 0;
+        height: calc(var(--n, 0) * 1%);
+        background: var(--agua);
+        transition: height 200ms linear;
+      }
+      #carregando .agua::before {
+        content: ''; position: absolute; left: 0; right: 0; top: -17px; height: 18px;
+        background: var(--agua);
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 22' preserveAspectRatio='none'%3E%3Cpath d='M0 11 Q35 0 70 11 T140 11 V22 H0Z'/%3E%3C/svg%3E") 0 0 / 120px 18px repeat-x;
+        animation: onda-crista 1.6s linear infinite;
+      }
+      /* chuva caindo (tile svg com riscos inclinados) */
+      #carregando .gotas {
+        position: absolute; inset: -160px 0 0 -40px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='160'%3E%3Cg stroke='%23fff' stroke-width='1.2' stroke-linecap='round' opacity='.35'%3E%3Cpath d='M20 10l-4 26M88 52l-4 26M54 104l-4 26M122 128l-4 26M110 14l-3 18M36 78l-3 18'/%3E%3C/g%3E%3C/svg%3E");
+        animation: cair 0.45s linear infinite;
+      }
+      [data-theme='light'] #carregando .gotas { filter: invert(1); opacity: 0.6; }
+      /* régua linimétrica na lateral: um risco por cm, maior a cada 5 cm */
+      #carregando .regua {
+        position: absolute; left: clamp(16px, 4vw, 48px); top: 12vh; bottom: 0; width: 60px;
+        background:
+          repeating-linear-gradient(to top, var(--tinta) 0 2px, transparent 2px 12.5%) 0 0 / 26px 100% no-repeat,
+          repeating-linear-gradient(to top, var(--tinta) 0 1px, transparent 1px 2.5%) 0 0 / 12px 100% no-repeat;
+        z-index: 1; opacity: 0.6;
+        font: 600 12px/1 'JetBrains Mono', monospace;
+      }
+      #carregando .regua i { position: absolute; left: 32px; font-style: normal; transform: translateY(50%); }
+      #carregando .medida {
+        position: relative; text-align: center;
+        display: grid; justify-items: center; gap: 10px;
+      }
+      /* o número fica claro onde a água já cobriu (gradiente preso à tela) */
+      #carregando .medida b {
+        display: block;
+        font-size: clamp(6rem, 26vw, 17rem); font-weight: 800; line-height: 0.85;
+        font-variation-settings: 'wdth' 75, 'opsz' 96;
+        font-variant-numeric: tabular-nums; letter-spacing: -0.04em;
+        background: linear-gradient(to top, var(--fundo) calc(var(--n, 0) * 1%), var(--tinta) 0) fixed;
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+      }
+      #carregando .unidade { font-size: 1rem; letter-spacing: 0.02em; }
+      #carregando .faixa {
+        --cor: #4ade80;
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 6px 14px; border-radius: 999px;
+        background: color-mix(in srgb, var(--fundo) 70%, transparent);
+        font-weight: 700; font-size: 0.95rem;
+        transition: color 200ms;
+      }
+      #carregando .faixa::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--cor); }
+      #carregando .faixa[data-faixa='ATENCAO'] { --cor: #ffd23f; }
+      #carregando .faixa[data-faixa='PERIGO'] { --cor: #ff7373; }
+      /* relâmpago final antes de abrir o site */
+      #carregando .clarao { position: absolute; inset: 0; background: #e8f4ff; opacity: 0; pointer-events: none; }
+      #carregando.raio .clarao { animation: clarao 520ms ease-out; }
+      #carregando.saiu { transform: translateY(-100%); }
+      @keyframes onda-mar { to { background-position: 120px 0; } }
+      @keyframes onda-crista { to { mask-position: 120px 0; } }
+      @keyframes cair { to { transform: translate(-28px, 160px); } }
+      @keyframes clarao { 0% { opacity: 0.9; } 12% { opacity: 0.1; } 22% { opacity: 0.75; } 100% { opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) { #carregando { display: none; } }
+    </style>
     <title>Bolsão Alerta RJ</title>
   </head>
   <body>
+    <div id="carregando" role="status" aria-label="Carregando">
+      <div class="gotas"></div>
+      <div class="regua"><i style="bottom:0">0</i><i style="bottom:25%">10</i><i style="bottom:50%">20</i><i style="bottom:75%">30</i><i style="bottom:100%">40</i></div>
+      <div class="agua"></div>
+      <p class="medida"><b>00</b><span class="unidade">cm de água na pista</span><span class="faixa" data-faixa="NORMAL">Pista livre</span></p>
+      <div class="clarao"></div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

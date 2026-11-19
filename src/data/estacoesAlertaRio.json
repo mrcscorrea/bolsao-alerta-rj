@@ -1,0 +1,203 @@
+{
+ "fonte": "Geo-Rio / Prefeitura do Rio — Estações Alerta Rio (pgeo3.rio.rj.gov.br)",
+ "estacoes": [
+  {
+   "cod": 31,
+   "nome": "Laranjeiras",
+   "lng": -43.1875,
+   "lat": -22.94056
+  },
+  {
+   "cod": 32,
+   "nome": "São Cristóvão",
+   "lng": -43.22167,
+   "lat": -22.89667
+  },
+  {
+   "cod": 14,
+   "nome": "Jacarepaguá/Tanque",
+   "lng": -43.36472,
+   "lat": -22.9125
+  },
+  {
+   "cod": 12,
+   "nome": "Bangu",
+   "lng": -43.46583,
+   "lat": -22.88028
+  },
+  {
+   "cod": 24,
+   "nome": "Anchieta",
+   "lng": -43.40333,
+   "lat": -22.82694
+  },
+  {
+   "cod": 26,
+   "nome": "Campo Grande",
+   "lng": -43.56194,
+   "lat": -22.90361
+  },
+  {
+   "cod": 22,
+   "nome": "Santa Cruz",
+   "lng": -43.68444,
+   "lat": -22.90944
+  },
+  {
+   "cod": 27,
+   "nome": "Sepetiba",
+   "lng": -43.71167,
+   "lat": -22.96889
+  },
+  {
+   "cod": 20,
+   "nome": "Guaratiba",
+   "lng": -43.59472,
+   "lat": -23.05028
+  },
+  {
+   "cod": 25,
+   "nome": "Grota Funda",
+   "lng": -43.52139,
+   "lat": -23.01444
+  },
+  {
+   "cod": 19,
+   "nome": "Barra/Rio Centro",
+   "lng": -43.40508,
+   "lat": -22.98129
+  },
+  {
+   "cod": 18,
+   "nome": "Jacarepaguá/Cidade de Deus",
+   "lng": -43.36278,
+   "lat": -22.94556
+  },
+  {
+   "cod": 7,
+   "nome": "Grajaú",
+   "lng": -43.2675,
+   "lat": -22.92222
+  },
+  {
+   "cod": 23,
+   "nome": "Grande Méier",
+   "lng": -43.27806,
+   "lat": -22.89056
+  },
+  {
+   "cod": 13,
+   "nome": "Piedade",
+   "lng": -43.31005,
+   "lat": -22.89182
+  },
+  {
+   "cod": 10,
+   "nome": "Madureira",
+   "lng": -43.33889,
+   "lat": -22.87333
+  },
+  {
+   "cod": 11,
+   "nome": "Irajá",
+   "lng": -43.33694,
+   "lat": -22.82694
+  },
+  {
+   "cod": 9,
+   "nome": "Penha",
+   "lng": -43.27528,
+   "lat": -22.84444
+  },
+  {
+   "cod": 8,
+   "nome": "Ilha do Governador",
+   "lng": -43.21028,
+   "lat": -22.81806
+  },
+  {
+   "cod": 15,
+   "nome": "Saúde",
+   "lng": -43.18786,
+   "lat": -22.89606
+  },
+  {
+   "cod": 17,
+   "nome": "Barra/Itanhangá",
+   "lng": -43.29965,
+   "lat": -23.00849
+  },
+  {
+   "cod": 16,
+   "nome": "Jardim Botânico",
+   "lng": -43.22389,
+   "lat": -22.97278
+  },
+  {
+   "cod": 2,
+   "nome": "Urca",
+   "lng": -43.16667,
+   "lat": -22.95583
+  },
+  {
+   "cod": 5,
+   "nome": "Santa Teresa",
+   "lng": -43.19639,
+   "lat": -22.93167
+  },
+  {
+   "cod": 4,
+   "nome": "Tijuca",
+   "lng": -43.22167,
+   "lat": -22.93194
+  },
+  {
+   "cod": 6,
+   "nome": "Copacabana",
+   "lng": -43.18944,
+   "lat": -22.98639
+  },
+  {
+   "cod": 3,
+   "nome": "Rocinha",
+   "lng": -43.245,
+   "lat": -22.98583
+  },
+  {
+   "cod": 1,
+   "nome": "Vidigal",
+   "lng": -43.23306,
+   "lat": -22.9925
+  },
+  {
+   "cod": 28,
+   "nome": "Alto da Boa Vista",
+   "lng": -43.27833,
+   "lat": -22.96583
+  },
+  {
+   "cod": 29,
+   "nome": "Av. Brasil/Mendanha",
+   "lng": -43.54111,
+   "lat": -22.85694
+  },
+  {
+   "cod": 21,
+   "nome": "Estrada Grajaú/Jacarepaguá",
+   "lng": -43.31583,
+   "lat": -22.92556
+  },
+  {
+   "cod": 30,
+   "nome": "Recreio dos Bandeirantes",
+   "lng": -43.44056,
+   "lat": -23.01
+  },
+  {
+   "cod": 33,
+   "nome": "Tijuca/Muda",
+   "lng": -43.24333,
+   "lat": -22.93278
+  }
+ ]
+}

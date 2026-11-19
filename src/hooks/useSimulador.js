@@ -3,7 +3,7 @@ import { calcularRisco, classificarFaixa } from '../domain/risco.js'
 import { tocarAlarme } from '../services/buzzer.js'
 
 /** Os dois "sensores" do circuito, controlados por sliders na página. */
-export function useSimulador(inicial = { laminaCm: 6, chuvaMmH: 12 }) {
+export function useSimulador(inicial = { laminaCm: 16, chuvaMmH: 45 }) {
   const [medidas, setMedidas] = useState(inicial)
   const [somAtivo, setSomAtivo] = useState(false)
   const risco = calcularRisco(medidas)
